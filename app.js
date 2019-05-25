@@ -18,11 +18,7 @@ const { User } = require("./models/User");
 
 const app = express();
 
-app.engine('handlebars', exphbs({
-  defaultLayout: "main"
-}));
 
-app.set('view engine', 'handlebars');
 
 mongoose
   .connect(keys.mongoURI, {
@@ -34,6 +30,12 @@ mongoose
   .catch(e => {
     console.log(e);
   });
+
+app.engine('handlebars', exphbs({
+  defaultLayout: "main"
+}));
+
+app.set('view engine', 'handlebars');
 
 //cookie-parser
 app.use(cookieParser());
@@ -54,7 +56,9 @@ app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
-})
+});
+
+
 
 app.use('/', index);
 app.use("/auth", auth);

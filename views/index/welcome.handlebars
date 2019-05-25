@@ -1,4 +1,10 @@
 <h1>Welcome</h1>
 <p>Welcome to My Story 1.0.0</p>
 <p>post stories about your best or worst experiences of life </p>
-<a href="/auth/google" class="red darken-1 btn"><i class="fa ga-google left"></i>Login With Google</a>
+
+{{#if user}}
+
+
+{{else}}
+<a href="/auth/google" class="red darken-1 btn"><i class="fa fa-google left"></i>Login With Google</a>
+{{/if}}
