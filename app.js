@@ -4,6 +4,7 @@ const passport = require("passport");
 var session = require("express-session");
 const cookieParser = require("cookie-parser");
 const exphbs = require('express-handlebars');
+const path = require('path');
 
 //passport config
 require("./config/passport")(passport);
@@ -12,6 +13,7 @@ require("./config/passport")(passport);
 const auth = require("./routes/auth");
 const keys = require("./config/keys");
 const index = require("./routes/index");
+const stories = require('./routes/stories');
 
 //model
 const { User } = require("./models/User");
@@ -57,11 +59,13 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
-
+//static folder
+app.use(express.static(path.join(__dirname, "public")));
 
 
 app.use('/', index);
 app.use("/auth", auth);
+app.use('/stories', stories);
 
 
 
